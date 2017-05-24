@@ -1,6 +1,6 @@
 # Functional-TDD-Workshop
 
-Repository for collection material and ideas for [workshop on TDD with functional programming languages](git@github.com:jlink/Functional-TDD-Workshop.git).
+Repository for collection material and ideas for [workshop on TDD with functional programming languages](http://blog.johanneslink.net/2017/02/24/functional-tdd-workshop/).
 
 The repository itself is supposed to contain code examples and only
 workshop participants will be granted write access.
