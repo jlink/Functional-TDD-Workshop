@@ -1,0 +1,36 @@
+module Diamond where
+
+import Test.QuickCheck
+
+type Line = (Char, Int) -- line character to begin and end the line, number of space in between
+
+diamond :: Char -> [Line]
+diamond c = intDiamond (ord c - ordA)
+
+ordA = ord 'a'
+
+intDiamond i = full (up i)
+
+full upDiamond   = upDiamond ++ reverse (init upDiamond) 
+up   end         = [ (chr(ordA + i), numSpaces i) | i <- [0..end] ] where
+     numSpaces 0 = 0
+     numSpaces n = n * 2 - 1
+
+--  Tests ---- ---- ---- ---- ---- --
+
+einfachA = once (diamond 'a' == [('a',0)])
+einfachB = once (diamond 'b' == [('a',0),('b',1),('a',0)])
+einfachC = once (diamond 'c' == [('a',0),('b',1),('c',3),('b',1),('a',0)])
+
+forLowerCaseLettersNums = forAll $ choose (ordA + 0, ordA + 25) 
+
+beginsWithA = forLowerCaseLettersNums firstIsA where
+  firstIsA i = head (intDiamond i) == ('a',0)  
+
+palindrome = forLowerCaseLettersNums doWithNum where
+  doWithNum i = intDiamond i == reverse (intDiamond i)  
+  
+diamondHeightIsUneven = forLowerCaseLettersNums ( \i -> odd $ length $ intDiamond i )
+ 
+
+main _ = println $ diamond 'c'
