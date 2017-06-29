@@ -1,0 +1,33 @@
+module Social where
+
+import Test.QuickCheck
+
+type Post = String
+type Timeline = [Post]
+
+publish :: Post -> Timeline -> Timeline
+publish post timeline = timeline ++ [post]
+
+{-- covered by test below                     
+publishing_adds_to_empty_timeline = property adding where
+    adding post = publish post [] == [post]
+--}
+publishing_adds_to_arby_timeline = property adding where
+    adding post timeline = length(publish post timeline) > length timeline
+
+foo = once bar where
+    bar s = doItAll (before s) (after s) 
+    before other = return other
+    after other newtl = case newtl of ...  
+
+getUserPost :: IO Post
+getUserPost = return "Johannes ist der Grösste."
+
+doItAll :: IO String -> (Timeline-> IO ()) -> IO ()
+doItAll before after = do
+    post <- before
+    newTimeline = publish post []
+    after newTimeline
+main :: args -> IO ()
+main _ = 
+    doItAll getUserPost println
