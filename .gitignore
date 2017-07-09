@@ -49,3 +49,6 @@ bin/
 *.log
 *.graphml
 target
+
+# Windows links
+*.lnk
